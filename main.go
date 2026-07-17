@@ -14,33 +14,41 @@ func main() {
 		fmt.Printf("Error opening file: %s", err)
 		os.Exit(1)
 	}
-	defer f.Close()
-
-	var msg string
-	var msgLines []string
-	step := 0
-	msgLines = append(msgLines, "")
-
-	// Prints each line as soon as they are ready
-	for {
-		buff := make([]byte, 8)
-		_, err := f.Read(buff)
-		if err != nil {
-			if !errors.Is(err, io.EOF) {
-				fmt.Printf("Error reading file: %s", err)
-			}
-			break
-		}
-		msg += string(buff)
-
-		if strings.Contains(msg, "\n") {
-			part := strings.Split(msg, "\n")
-			msgLines[step] += part[0]
-			fmt.Printf("read: %s\n", msgLines[step])
-
-			msgLines = append(msgLines, part[1])
-			step += 1
-			msg = ""
-		}
+	strChan := getLinesChannel(f)
+	for str := range strChan {
+		fmt.Printf("read: %s\n", str)
 	}
+}
+
+func getLinesChannel(f io.ReadCloser) <-chan string {
+	strChan := make(chan string)
+
+	go func() {
+		defer f.Close()
+		defer close(strChan)
+		var msg string
+		var msgLine string
+
+		// adds 8 bytes at a time to a line, and sends line to channel on linebreaks
+		for {
+			buff := make([]byte, 8)
+			_, err := f.Read(buff)
+			if err != nil {
+				if !errors.Is(err, io.EOF) {
+					fmt.Printf("Error reading file: %s", err)
+					return
+				}
+				break
+			}
+			msg += string(buff)
+			if strings.Contains(msg, "\n") {
+				parts := strings.Split(msg, "\n")
+				msgLine += parts[0]
+				strChan <- msgLine
+				msgLine = parts[1]
+				msg = ""
+			}
+		}
+	}()
+	return strChan
 }
