@@ -24,11 +24,10 @@ func main() {
 		}
 
 		fmt.Println("Accepted connection from", conn.RemoteAddr())
-		reqChan, err := Req.RequestFromReader(conn)
+		req, err := Req.RequestFromReader(conn)
 		if err != nil {
 			log.Fatalf("Error reading request: %s", err)
 		}
-		req := <-reqChan
 		if req != nil {
 			fmt.Printf("Request line:\n- Method: %s\n- Target: %s\n- Version: %s\n",
 				req.RequestLine.Method, req.RequestLine.RequestTarget, req.RequestLine.HttpVersion)

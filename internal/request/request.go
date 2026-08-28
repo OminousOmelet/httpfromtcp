@@ -30,42 +30,37 @@ type RequestLine struct {
 	Method        string
 }
 
-func RequestFromReader(reader io.Reader) (<-chan *Request, error) {
-	reqChan := make(chan *Request)
-	go func() {
-		defer close(reqChan)
-		buff := make([]byte, BUFFER_SIZE)
-		readToIndex := 0
-		req := &Request{Status: Initialized}
-		for req.Status != Done {
-			if readToIndex >= len(buff) {
-				temp := make([]byte, len(buff)*2)
-				copy(temp, buff)
-				buff = temp
-			}
-			n, err := reader.Read(buff[readToIndex:])
-			if err == io.EOF {
-				req.Status = Done
-				break // redundant but whatever
-			}
-			if err != nil {
-				return
-			}
-			readToIndex += n
-			n, err = req.parse(buff[:readToIndex])
-			if err != nil {
-				return
-			}
-			if n != 0 {
-				temp := make([]byte, len(buff)-n)
-				copy(temp, buff[n:])
-				buff = temp
-				readToIndex -= n
-			}
+func RequestFromReader(reader io.Reader) (*Request, error) {
+	buff := make([]byte, BUFFER_SIZE)
+	readToIndex := 0
+	req := &Request{Status: Initialized}
+	for req.Status != Done {
+		if readToIndex >= len(buff) {
+			temp := make([]byte, len(buff)*2)
+			copy(temp, buff)
+			buff = temp
 		}
-		reqChan <- req
-	}()
-	return reqChan, nil
+		n, err := reader.Read(buff[readToIndex:])
+		if err == io.EOF {
+			req.Status = Done
+			break // redundant but whatever
+		}
+		if err != nil {
+			return nil, err
+		}
+		readToIndex += n
+		n, err = req.parse(buff[:readToIndex])
+		if err != nil {
+			return nil, err
+		}
+		if n != 0 {
+			temp := make([]byte, len(buff)-n)
+			copy(temp, buff[n:])
+			buff = temp
+			readToIndex -= n
+		}
+	}
+	return req, nil
 }
 
 func parseRequestLine(data []byte) (*RequestLine, int, error) {
