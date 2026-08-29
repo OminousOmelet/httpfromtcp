@@ -2,7 +2,9 @@ package headers
 
 import (
 	"errors"
+	"slices"
 	"strings"
+	"unicode"
 )
 
 type Headers map[string]string
@@ -31,7 +33,26 @@ func (h Headers) Parse(data []byte) (n int, done bool, err error) {
 	if strings.HasSuffix(key, " ") {
 		return 0, false, errors.New("invalid spacing")
 	}
+	if !isValidFieldName(key) {
+		return 0, false, errors.New("invalid field name")
+	}
+	key = strings.ToLower(key)
 	h[key] = strings.Trim(value, " ")
-	//bytesTotal := crflBytes + len(key) + len(h[key])
 	return bytesUsed, false, nil
+}
+
+var special_chars = []rune{'!', '#', '$', '%', '&', '\'', '*', '+', '-', '^', '_', '`', '|', '~'}
+
+func isValidFieldName(str string) bool {
+	if len(str) == 0 {
+		return false
+	}
+	for _, r := range str {
+		if !unicode.IsLetter(r) && !unicode.IsDigit(r) {
+			if !slices.Contains(special_chars, r) {
+				return false
+			}
+		}
+	}
+	return true
 }

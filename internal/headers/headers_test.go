@@ -9,13 +9,13 @@ import (
 )
 
 func TestHeadersParse(t *testing.T) {
-	// Test: Valid single header
+	// Test: Valid single header, ensure header key is lower-case
 	headers := NewHeaders()
 	data := []byte("Host: localhost:42069\r\n\r\n")
 	n, done, err := headers.Parse(data)
 	require.NoError(t, err)
 	require.NotNil(t, headers)
-	assert.Equal(t, "localhost:42069", headers["Host"])
+	assert.Equal(t, "localhost:42069", headers["host"])
 	assert.Equal(t, 23, n)
 	assert.False(t, done)
 	fmt.Println(headers)
@@ -29,14 +29,14 @@ func TestHeadersParse(t *testing.T) {
 	assert.Equal(t, 29, n)
 	assert.False(t, done)
 
-	// Test: Valid 2 headers with existing headers
+	// Test: Valid 2 headers with existing headers (plus lower-case key check)
 	headers = map[string]string{"host": "localhost:42069"}
 	data = []byte("User-Agent: curl/7.81.0\r\nAccept: */*\r\n\r\n")
 	n, done, err = headers.Parse(data)
 	require.NoError(t, err)
 	require.NotNil(t, headers)
 	assert.Equal(t, "localhost:42069", headers["host"])
-	assert.Equal(t, "curl/7.81.0", headers["User-Agent"])
+	assert.Equal(t, "curl/7.81.0", headers["user-agent"])
 	assert.Equal(t, 25, n)
 	assert.False(t, done)
 
@@ -64,4 +64,20 @@ func TestHeadersParse(t *testing.T) {
 	require.NotNil(t, headers)
 	assert.Equal(t, 0, n)
 	assert.True(t, done)
+
+	// Test: Field name with invalid chars
+	headers = NewHeaders()
+	data = []byte("H@st: localhost:42069\r\n\r\n")
+	n, done, err = headers.Parse(data)
+	require.Error(t, err)
+	assert.Equal(t, 0, n)
+	assert.False(t, done)
+
+	// Test: No field name
+	headers = NewHeaders()
+	data = []byte(": localhost:42069\r\n\r\n")
+	n, done, err = headers.Parse(data)
+	require.Error(t, err)
+	assert.Equal(t, 0, n)
+	assert.False(t, done)
 }
