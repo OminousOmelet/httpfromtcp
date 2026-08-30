@@ -1,7 +1,6 @@
 package headers
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -18,7 +17,6 @@ func TestHeadersParse(t *testing.T) {
 	assert.Equal(t, "localhost:42069", headers["host"])
 	assert.Equal(t, 23, n)
 	assert.False(t, done)
-	fmt.Println(headers)
 
 	// Test: Valid single header with extra whitespace
 	headers = NewHeaders()
@@ -79,5 +77,25 @@ func TestHeadersParse(t *testing.T) {
 	n, done, err = headers.Parse(data)
 	require.Error(t, err)
 	assert.Equal(t, 0, n)
+	assert.False(t, done)
+
+	// Test: multiple values for the same header key
+	headers = map[string]string{"set-person": "big-omelet, little-omelet"}
+	data = []byte("Set-Person: french-omelet\r\n\r\n")
+	n, done, err = headers.Parse(data)
+	require.NoError(t, err)
+	require.NotNil(t, headers)
+	assert.Equal(t, "big-omelet, little-omelet, french-omelet", headers["set-person"])
+	assert.Equal(t, 27, n)
+	assert.False(t, done)
+
+	// Test: double value for the same header key
+	headers = map[string]string{"set-person": "big-omelet, little-omelet"}
+	data = []byte("Set-Person: big-omelet\r\n\r\n")
+	n, done, err = headers.Parse(data)
+	require.NoError(t, err)
+	require.NotNil(t, headers)
+	assert.Equal(t, "big-omelet, little-omelet", headers["set-person"])
+	assert.Equal(t, 24, n)
 	assert.False(t, done)
 }

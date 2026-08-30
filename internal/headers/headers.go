@@ -37,7 +37,15 @@ func (h Headers) Parse(data []byte) (n int, done bool, err error) {
 		return 0, false, errors.New("invalid field name")
 	}
 	key = strings.ToLower(key)
-	h[key] = strings.Trim(value, " ")
+	value = strings.Trim(value, " ")
+	// check if field exists, and add entry if not already present
+	if _, ok := h[key]; ok {
+		if !strings.Contains(h[key], value) {
+			h[key] += ", " + value
+		}
+	} else {
+		h[key] = value
+	}
 	return bytesUsed, false, nil
 }
 
