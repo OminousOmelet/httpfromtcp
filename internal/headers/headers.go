@@ -16,10 +16,10 @@ func NewHeaders() Headers {
 func (h Headers) Parse(data []byte) (n int, done bool, err error) {
 	str := string(data)
 	if !strings.Contains(str, "\r\n") {
-		return 0, false, nil
+		return 0, false, nil // possibly incomplete data?
 	}
 	if strings.HasPrefix(str, "\r\n") {
-		return 0, true, nil
+		return 2, true, nil
 	}
 	if strings.HasPrefix(str, " ") {
 		return 0, false, errors.New("field line contains leading spaces")

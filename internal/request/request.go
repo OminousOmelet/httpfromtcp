@@ -2,6 +2,7 @@ package request
 
 import (
 	"errors"
+	"httpfromtcp/internal/headers"
 	"io"
 	"log"
 	"os"
@@ -16,10 +17,12 @@ type Status int
 
 const (
 	Initialized = iota
+	ParsingHeaders
 	Done
 )
 
 type Request struct {
+	Headers     headers.Headers
 	RequestLine RequestLine
 	Status      Status
 }
@@ -33,7 +36,7 @@ type RequestLine struct {
 func RequestFromReader(reader io.Reader) (*Request, error) {
 	buff := make([]byte, BUFFER_SIZE)
 	readToIndex := 0
-	req := &Request{Status: Initialized}
+	req := &Request{Headers: headers.NewHeaders(), Status: Initialized}
 	for req.Status != Done {
 		if readToIndex >= len(buff) {
 			temp := make([]byte, len(buff)*2)
@@ -41,11 +44,13 @@ func RequestFromReader(reader io.Reader) (*Request, error) {
 			buff = temp
 		}
 		n, err := reader.Read(buff[readToIndex:])
-		if err == io.EOF {
-			req.Status = Done
-			break // redundant but whatever
-		}
 		if err != nil {
+			if err == io.EOF {
+				if req.Status != Done {
+					return nil, errors.New("incomplete request")
+				}
+				break
+			}
 			return nil, err
 		}
 		readToIndex += n
@@ -53,12 +58,8 @@ func RequestFromReader(reader io.Reader) (*Request, error) {
 		if err != nil {
 			return nil, err
 		}
-		if n != 0 {
-			temp := make([]byte, len(buff)-n)
-			copy(temp, buff[n:])
-			buff = temp
-			readToIndex -= n
-		}
+		copy(buff, buff[n:])
+		readToIndex -= n
 	}
 	return req, nil
 }
@@ -89,26 +90,44 @@ func parseRequestLine(data []byte) (*RequestLine, int, error) {
 }
 
 func (r *Request) parse(data []byte) (int, error) {
-	if r.Status == Done {
-		return 0, errors.New("request already parsed")
-	}
-	if r.Status != Initialized {
-		return 0, nil // ignore until initialized
-	}
 	err := writeToDataLog(data)
 	if err != nil {
 		log.Printf("Error writing to data log: %s", err)
 	}
-	reqLine, n, err := parseRequestLine(data)
-	if err != nil {
-		return n, err
+	totalBytesParsed := 0
+	switch r.Status {
+	case Initialized:
+		reqLine, n, err := parseRequestLine(data)
+		if err != nil {
+			return n, err
+		}
+		if n == 0 {
+			return 0, nil // keep trying until request line is complete
+		}
+		r.RequestLine = *reqLine
+		r.Status = ParsingHeaders
+		return n, nil
+	case ParsingHeaders:
+		for r.Status != Done {
+			n, done, err := r.Headers.Parse(data[totalBytesParsed:])
+			if err != nil {
+				return totalBytesParsed, err
+			}
+			if n == 0 {
+				return 0, nil // keep trying until request line is complete
+			}
+			if done {
+				r.Status = Done
+				return totalBytesParsed, nil // redundant??
+			}
+			totalBytesParsed += n
+		}
+		return totalBytesParsed, nil
+	case Done:
+		return 0, errors.New("error during read attempt: data already in 'Done' status")
+	default:
+		return 0, errors.New("unknown status")
 	}
-	if n == 0 {
-		return 0, nil // keep trying until request line is complete
-	}
-	r.RequestLine = *reqLine
-	r.Status = Done
-	return n, nil
 }
 
 func writeToDataLog(data []byte) error {

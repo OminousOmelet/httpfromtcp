@@ -4,4 +4,18 @@ Host: GET /priGET /prime/agen GET /prime/agen HTTP/1.1
 Host: GET /priGET /prime/agen GET /prime/agen HTTP/1.1
 Host: GET /priGET /prime/agen GET /prime/agen HTTP/1.1
 Host: GET /priGET /prime/agen GET /prime/agen HTTP/1.1
-Host: 
+Host: GET / HTGET / HTTP/1.1
+GET / HTGET / HTTP/1.1
+GET / HTGET / HTTP/1.1
+GET / HTGET / HTTP/1.1
+GET / HTGET / HTTP/1.1
+GET / HTGET / HTTP/1.1
+GET / HTGET / HTTP/1.1
+GET / HTGET / HTTP/1.1
+GET /cofGET /coffee HTTPGET /coffee HTTP/1.1
+Host: locaHost: localhost:4206POST /coPOST /coffee HTTPOST /coffee HTTP/1.1
+Host: locHost: localhost:42/coffee /coffee HTTP/1.1/coffee HTTP/1.1
+Host: localhos/coffee /coffee HTTP/1.1/coffee HTTP/1.1 POST
+Host: loc/coffee /coffee HTTP/1.1/coffee HTTP/1.1 1.1
+Host: locaOPTIONS OPTIONS /prime/rOPTIONS /prime/rib TCP/1.1
+HostGET / HTGET / HTTP/1.1
