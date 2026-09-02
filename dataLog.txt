@@ -19,3 +19,9 @@ Host: localhos/coffee /coffee HTTP/1.1/coffee HTTP/1.1 POST
 Host: loc/coffee /coffee HTTP/1.1/coffee HTTP/1.1 1.1
 Host: locaOPTIONS OPTIONS /prime/rOPTIONS /prime/rib TCP/1.1
 HostGET / HTGET / HTTP/1.1
+GET /useGET /use-neovim-GET /use-neovim-btw HTTP/1.1
+HoHost: localhost:42069
+User-AgenHost: localhost:42069
+User-Agent: curl/8.18.0
+Accept: */*
+
