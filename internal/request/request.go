@@ -2,10 +2,12 @@ package request
 
 import (
 	"errors"
+	"fmt"
 	"httpfromtcp/internal/headers"
 	"io"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 	"unicode"
 )
@@ -18,6 +20,7 @@ type Status int
 const (
 	Initialized = iota
 	ParsingHeaders
+	ParsingBody
 	Done
 )
 
@@ -25,6 +28,8 @@ type Request struct {
 	Headers     headers.Headers
 	RequestLine RequestLine
 	Status      Status
+	Body        []byte
+	BodyLength  int
 }
 
 type RequestLine struct {
@@ -36,7 +41,7 @@ type RequestLine struct {
 func RequestFromReader(reader io.Reader) (*Request, error) {
 	buff := make([]byte, BUFFER_SIZE)
 	readToIndex := 0
-	req := &Request{Headers: headers.NewHeaders(), Status: Initialized}
+	req := &Request{Headers: headers.NewHeaders(), Status: Initialized, Body: []byte{}, BodyLength: 0}
 	for req.Status != Done {
 		if readToIndex >= len(buff) {
 			temp := make([]byte, len(buff)*2)
@@ -64,6 +69,74 @@ func RequestFromReader(reader io.Reader) (*Request, error) {
 	return req, nil
 }
 
+func (r *Request) parse(data []byte) (int, error) {
+	totalBytesParsed := 0
+	for r.Status != Done {
+		n, err := r.parseSingle(data[totalBytesParsed:])
+		if err != nil {
+			return 0, err
+		}
+		totalBytesParsed += n
+		if n == 0 {
+			break
+		}
+	}
+	return totalBytesParsed, nil
+}
+
+func (r *Request) parseSingle(data []byte) (int, error) {
+	err := writeToDataLog(data)
+	if err != nil {
+		log.Printf("Error writing to data log: %s", err)
+	}
+	switch r.Status {
+	case Initialized:
+		reqLine, n, err := parseRequestLine(data)
+		if err != nil {
+			return n, err
+		}
+		if n == 0 {
+			return 0, nil // keep trying until request line is complete
+		}
+		r.RequestLine = *reqLine
+		r.Status = ParsingHeaders
+		return n, nil
+	case ParsingHeaders:
+		n, done, err := r.Headers.Parse(data)
+		if err != nil {
+			return 0, err
+		}
+		if done {
+			r.Status = ParsingBody
+		}
+		return n, nil
+	case ParsingBody: // Copied from solution files, pffffff
+		contentLenStr, ok := r.Headers.Get("Content-Length")
+		if !ok {
+			// assume that if no content-length header is present, there is no body
+			r.Status = Done
+			return len(data), nil
+		}
+		contentLen, err := strconv.Atoi(contentLenStr)
+		if err != nil {
+			return 0, fmt.Errorf("malformed Content-Length: %s", err)
+		}
+		r.Body = append(r.Body, data...)
+		r.BodyLength += len(data)
+		if r.BodyLength > contentLen {
+			return 0, fmt.Errorf("Content-Length too large")
+		}
+		if r.BodyLength == contentLen {
+			r.Status = Done
+		}
+		return len(data), nil
+	case Done:
+		return 0, errors.New("error during read attempt: data already in 'Done' status")
+	default:
+		return 0, errors.New("unknown status")
+	}
+}
+
 func parseRequestLine(data []byte) (*RequestLine, int, error) {
 	str, _, complete := strings.Cut(string(data), "\r\n")
 	if !complete {
@@ -87,47 +160,6 @@ func parseRequestLine(data []byte) (*RequestLine, int, error) {
 	reqLine.RequestTarget = parts[1]
 	reqLine.HttpVersion = parts[2][5:]
 	return reqLine, len(str) + 2, nil
-}
-
-func (r *Request) parse(data []byte) (int, error) {
-	err := writeToDataLog(data)
-	if err != nil {
-		log.Printf("Error writing to data log: %s", err)
-	}
-	totalBytesParsed := 0
-	switch r.Status {
-	case Initialized:
-		reqLine, n, err := parseRequestLine(data)
-		if err != nil {
-			return n, err
-		}
-		if n == 0 {
-			return 0, nil // keep trying until request line is complete
-		}
-		r.RequestLine = *reqLine
-		r.Status = ParsingHeaders
-		return n, nil
-	case ParsingHeaders:
-		for r.Status != Done {
-			n, done, err := r.Headers.Parse(data[totalBytesParsed:])
-			if err != nil {
-				return totalBytesParsed, err
-			}
-			if n == 0 {
-				return 0, nil // keep trying until request line is complete
-			}
-			if done {
-				r.Status = Done
-				return totalBytesParsed, nil // redundant??
-			}
-			totalBytesParsed += n
-		}
-		return totalBytesParsed, nil
-	case Done:
-		return 0, errors.New("error during read attempt: data already in 'Done' status")
-	default:
-		return 0, errors.New("unknown status")
-	}
 }
 
 func writeToDataLog(data []byte) error {

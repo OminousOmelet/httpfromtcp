@@ -25,3 +25,36 @@ User-AgenHost: localhost:42069
 User-Agent: curl/8.18.0
 Accept: */*
 
+POST /coPOST /coffee HTTPOST /coffee HTTP/1.1
+Host: locHost: locHost: localhost:42069
+User-AgenUser-AgenUser-Agent: curl/8.18.0
+Accept:Accept:Accept: */*
+Content-Type: appliContent-Type: appliContent-Type: application/json
+Content-Length: 39
+
+{"type": "
+{"type": "{"type": "dark mode", "size": "medium"}POST /coPOST /coffee HTTPOST /coffee HTTP/1.1
+Host: locHost: locHost: localhost:42069
+User-AgenUser-AgenUser-Agent: curl/8.18.0
+Accept:Accept:Accept: */*
+Content-Type: appliContent-Type: appliContent-Type: application/json
+Content-Length: 39
+
+{"type": "
+{"type": "{"type": "dark mode", "size": "medium"}POST /coPOST /coffee HTTPOST /coffee HTTP/1.1
+Host: locHost: locHost: localhost:42069
+User-AgenUser-AgenUser-Agent: curl/8.18.0
+Accept:Accept:Accept: */*
+Content-Type: appliContent-Type: appliContent-Type: application/json
+Content-Length: 39
+
+{"type": "
+{"type": "{"type": "dark mode", "size": "medium"}POST /coPOST /coffee HTTPOST /coffee HTTP/1.1
+Host: locHost: locHost: localhost:42069
+User-AgenUser-AgenUser-Agent: curl/8.18.0
+Accept:Accept:Accept: */*
+Content-Type: appliContent-Type: appliContent-Type: application/json
+Content-Length: 39
+
+{"type": "
+{"type": "{"type": "dark mode", "size": "medium"}
