@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	R "httpfromtcp/internal/response"
 	"log"
 	"net"
 	"sync/atomic"
@@ -46,10 +47,13 @@ func (s *Server) listen() {
 
 func (s *Server) handle(conn net.Conn) {
 	defer conn.Close()
-	response := "HTTP/1.1 200 OK\r\n" + // Status line
-		"Content-Type: text/plain\r\n" + // Example header
-		"Content-Length: 13\r\n" + // Content length header
-		"\r\n" + // Blank line to separate headers from the body
-		"Hello World!\n" // Body
-	conn.Write([]byte(response))
+	err := R.WriteStatusLine(conn, R.OK)
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	}
+	h := R.GetDefaultHeaders(0)
+	err = R.WriteHeaders(conn, h)
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	}
 }
