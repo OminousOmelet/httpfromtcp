@@ -49,3 +49,12 @@ func WriteHeaders(w io.Writer, headers H.Headers) error {
 	_, err := w.Write([]byte(CRLF))
 	return err
 }
+
+func WriteBody(w io.Writer, body []byte) error {
+	data := append([]byte(CRLF), body...)
+	_, err := w.Write(data)
+	if err != nil {
+		return err
+	}
+	return nil
+}

@@ -13,6 +13,7 @@ import (
 )
 
 const BUFFER_SIZE = 8
+const CRLF = "\r\n"
 
 // faking enums is weird in Go
 type Status int
@@ -138,7 +139,7 @@ func (r *Request) parseSingle(data []byte) (int, error) {
 }
 
 func parseRequestLine(data []byte) (*RequestLine, int, error) {
-	str, _, complete := strings.Cut(string(data), "\r\n")
+	str, _, complete := strings.Cut(string(data), CRLF)
 	if !complete {
 		return nil, 0, nil // expected behavior until request line is complete
 	}

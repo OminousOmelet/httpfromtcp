@@ -1,24 +1,29 @@
 package server
 
 import (
+	"bytes"
 	"fmt"
-	R "httpfromtcp/internal/response"
+	Req "httpfromtcp/internal/request"
+	Resp "httpfromtcp/internal/response"
 	"log"
 	"net"
 	"sync/atomic"
 )
 
+const CRLF = "\r\n"
+
 type Server struct {
 	listener net.Listener
 	closed   atomic.Bool // async-safe flag, default is false
+	handler  Handler
 }
 
-func Serve(port int) (*Server, error) {
+func Serve(handler Handler, port int) (*Server, error) {
 	lsnr, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
 		return nil, err
 	}
-	server := &Server{listener: lsnr}
+	server := &Server{listener: lsnr, handler: handler}
 	go server.listen()
 	return server, nil
 }
@@ -47,13 +52,36 @@ func (s *Server) listen() {
 
 func (s *Server) handle(conn net.Conn) {
 	defer conn.Close()
-	err := R.WriteStatusLine(conn, R.OK)
+	req, err := Req.RequestFromReader(conn)
 	if err != nil {
-		fmt.Printf("error: %v\n", err)
+		log.Printf("Error parsing request: %s", err)
 	}
-	h := R.GetDefaultHeaders(0)
-	err = R.WriteHeaders(conn, h)
-	if err != nil {
-		fmt.Printf("error: %v\n", err)
+	var buff bytes.Buffer
+
+	// special handler error...handling
+	hErr := s.handler(&buff, req)
+	if hErr != nil {
+		err = WriteHandlerErrorToBuffer(&buff, hErr)
+		if err != nil {
+			fmt.Printf("failed to pass handler error: %s\n", err)
+			return
+		}
+		conn.Write([]byte(fmt.Sprintf("HTTP/1.1 %d\r\n\r\n%s", hErr.StatusCode, hErr.Message)))
+		return
 	}
+	msg := "All good, frfr\n"
+	conn.Write([]byte(fmt.Sprintf("HTTP/1.1 %d\r\n\r\n%s", Resp.OK, msg)))
+	// respHeaders := Resp.GetDefaultHeaders(0)
+	// err = Resp.WriteStatusLine(conn, Resp.OK)
+	// if err != nil {
+	// 	fmt.Printf("error writing status: %s\n", err)
+	// }
+	// err = Resp.WriteHeaders(conn, respHeaders)
+	// if err != nil {
+	// 	fmt.Printf("error writing headers: %s\n", err)
+	// }
+	// err = Resp.WriteBody(conn, buff.Bytes())
+	// if err != nil {
+	// 	fmt.Printf("error writing body: %s\n", err)
+	// }
 }

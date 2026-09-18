@@ -57,4 +57,435 @@ Content-Type: appliContent-Type: appliContent-Type: application/json
 Content-Length: 39
 
 {"type": "
-{"type": "{"type": "dark mode", "size": "medium"}
+{"type": "{"type": "dark mode", "size": "medium"}GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /youGET /yourproblemGET /yourproblem HTTP/1.1
+Host:Host:Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /mypGET /myproblem HGET /myproblem HTTP/1.1
+Host: 1Host: 1Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
+GET /useGET /use-nvim HTGET /use-nvim HTTP/1.1
+Host: 12Host: 12Host: 127.0.0.1:42069
+User-AgenUser-AgenUser-Agent: Go-http-client/1.1
+Accept-Encoding: gzip
+
+
