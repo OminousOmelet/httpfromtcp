@@ -2,6 +2,7 @@ package main
 
 import (
 	Req "httpfromtcp/internal/request"
+	Resp "httpfromtcp/internal/response"
 	Srvr "httpfromtcp/internal/server"
 	"io"
 	"log"
@@ -15,9 +16,9 @@ const port = 42069
 func handler(w io.Writer, req *Req.Request) *Srvr.HandlerError {
 	switch req.RequestLine.RequestTarget {
 	case "/yourproblem":
-		return &Srvr.HandlerError{StatusCode: 400, Message: "Your problem is not my problem\n"}
+		return &Srvr.HandlerError{StatusCode: Resp.OK, Message: "Your problem is not my problem\n"}
 	case "/myproblem":
-		return &Srvr.HandlerError{StatusCode: 500, Message: "Woopsie, my bad\n"}
+		return &Srvr.HandlerError{StatusCode: Resp.InternalServerError, Message: "Woopsie, my bad\n"}
 	default:
 		w.Write([]byte("All good, frfr\n"))
 		return nil

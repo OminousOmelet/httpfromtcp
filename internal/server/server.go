@@ -5,12 +5,29 @@ import (
 	"fmt"
 	Req "httpfromtcp/internal/request"
 	Resp "httpfromtcp/internal/response"
+	"io"
 	"log"
 	"net"
 	"sync/atomic"
 )
 
 const CRLF = "\r\n"
+
+type Handler func(w io.Writer, req *Req.Request) *HandlerError
+
+type HandlerError struct {
+	StatusCode Resp.StatusCode
+	Message    string
+}
+
+// copied from assignment, better DRY
+func WriteHandlerErrorToBuffer(w io.Writer, he *HandlerError) {
+	Resp.WriteStatusLine(w, he.StatusCode)
+	messageBytes := []byte(he.Message)
+	headers := Resp.GetDefaultHeaders(len(messageBytes))
+	Resp.WriteHeaders(w, headers)
+	w.Write(messageBytes)
+}
 
 type Server struct {
 	listener net.Listener
@@ -61,27 +78,12 @@ func (s *Server) handle(conn net.Conn) {
 	// special handler error...handling
 	hErr := s.handler(&buff, req)
 	if hErr != nil {
-		err = WriteHandlerErrorToBuffer(&buff, hErr)
-		if err != nil {
-			fmt.Printf("failed to pass handler error: %s\n", err)
-			return
-		}
-		conn.Write([]byte(fmt.Sprintf("HTTP/1.1 %d\r\n\r\n%s", hErr.StatusCode, hErr.Message)))
+		WriteHandlerErrorToBuffer(conn, hErr)
 		return
 	}
-	msg := "All good, frfr\n"
-	conn.Write([]byte(fmt.Sprintf("HTTP/1.1 %d\r\n\r\n%s", Resp.OK, msg)))
-	// respHeaders := Resp.GetDefaultHeaders(0)
-	// err = Resp.WriteStatusLine(conn, Resp.OK)
-	// if err != nil {
-	// 	fmt.Printf("error writing status: %s\n", err)
-	// }
-	// err = Resp.WriteHeaders(conn, respHeaders)
-	// if err != nil {
-	// 	fmt.Printf("error writing headers: %s\n", err)
-	// }
-	// err = Resp.WriteBody(conn, buff.Bytes())
-	// if err != nil {
-	// 	fmt.Printf("error writing body: %s\n", err)
-	// }
+
+	Resp.WriteStatusLine(conn, Resp.OK)
+	respHeaders := Resp.GetDefaultHeaders(buff.Len())
+	err = Resp.WriteHeaders(conn, respHeaders)
+	conn.Write(buff.Bytes())
 }
